@@ -15,8 +15,7 @@ def decrypt(text):
 
 def encrypt(text):
     encrypted = fernet.encrypt(text.encode())
-    sentence_entry.delete(0, END)
-    sentence_entry.insert(0, encrypted.decode())
+    result_label['text'] = encrypted.decode()
 
 
 root = Tk()
@@ -26,10 +25,10 @@ root.resizable(height=False, width=False)
 shit_label = Label(root, text='Enter your sentence', font=('Arial', 14))
 shit_label.grid(row=0, column=2, sticky=N)
 
-result_label = Label(root, font=('Arial', 14), wrap=WORD)
+result_label = Label(root, font=('Arial', 14), wrap=300)
 result_label.grid(row=3, column=2, sticky=S)
 
-sentence_entry = Entry(root, width=100)
+sentence_entry = Entry(root, width=50, font=('Arial', 14))
 sentence_entry.grid(row=1, column=0, columnspan=4)
 
 encrypt_button = Button(root, bg='grey', fg='white',
