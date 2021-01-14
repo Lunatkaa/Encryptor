@@ -1,5 +1,6 @@
 from cryptography.fernet import Fernet
 from tkinter import *
+import pyperclip
 
 file = open('key.key', 'rb')
 key = file.read()
@@ -16,6 +17,10 @@ def decrypt(text):
 def encrypt(text):
     encrypted = fernet.encrypt(text.encode())
     result_label['text'] = encrypted.decode()
+
+
+def copy_to_clipboard():
+    pyperclip.copy(result_label['text'])
 
 
 root = Tk()
@@ -38,6 +43,10 @@ encrypt_button.grid(row=2, column=1, sticky=E)
 decrypt_button = Button(root, bg='grey', fg='white',
                         text='DECRYPT', font=('Arial', 14), command=lambda: decrypt(sentence_entry.get()))
 decrypt_button.grid(row=2, column=3, sticky=W)
+
+copy_button = Button(root, bg='grey', fg='white',
+                     text='COPY', font=('Arial', 14), command=copy_to_clipboard)
+copy_button.grid(row=4, column=2)
 
 
 root.mainloop()
